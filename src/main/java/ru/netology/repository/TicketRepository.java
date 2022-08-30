@@ -8,9 +8,6 @@ public class TicketRepository {
 
     public Ticket[] tickets = new Ticket[0];
 
-    public TicketRepository(){
-    }
-
     // добавление нового билета в массив
     public void addTicket(Ticket addTicket) {
         if (findById(addTicket.getId()) != null) {
