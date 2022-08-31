@@ -9,11 +9,11 @@ import java.util.Arrays;
 
 public class TicketManager {
 
-    public TicketManager() {
+    private TicketRepository repository;
 
+    public TicketManager(TicketRepository repository) {
+        this.repository = repository;
     }
-
-    private TicketRepository repository = new TicketRepository();
 
     // методы зависимые от репозитория
     // добавление билета в массив
@@ -28,7 +28,7 @@ public class TicketManager {
 
     // логика менеджерра
     // поиск билета по аэропортам вылета-прилета
-    public Ticket[] findAll (String airportDeparture, String airportArrival) {
+    public Ticket[] findAll(String airportDeparture, String airportArrival) {
         Ticket[] results = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
             if (matchesFromTo(ticket, airportDeparture, airportArrival)) {
@@ -51,6 +51,6 @@ public class TicketManager {
         matchesFrom = ticket.getAirportDeparture().toUpperCase().contains(fromInput.toUpperCase());
         boolean matchesTo;
         matchesTo = ticket.getAirportArrival().toUpperCase().contains(toInput.toUpperCase());
-        return matchesFrom &&matchesTo;
+        return matchesFrom && matchesTo;
     }
 }

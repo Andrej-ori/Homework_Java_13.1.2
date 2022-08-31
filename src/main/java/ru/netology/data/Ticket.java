@@ -1,6 +1,6 @@
 package ru.netology.data;
 
-public class Ticket implements Comparable<Ticket>{
+public class Ticket implements Comparable<Ticket> {
 
     protected int id;
     protected int price;
@@ -64,9 +64,9 @@ public class Ticket implements Comparable<Ticket>{
     public int compareTo(Ticket o) {
         if (this.getPrice() < o.price) {
             return -1;
-        }else if(this.getPrice() > o.price) {
+        } else if (this.getPrice() > o.price) {
             return 1;
-        }else {
+        } else {
             return 0;
         }
     }

@@ -21,13 +21,14 @@ public class TicketRepositoryTest {
     Ticket ticket6 = new Ticket(6, 2_753, "SDF", "SVO", 259);
     Ticket ticket7 = new Ticket(7, 12_300, "SVO", "LED", 45);
     Ticket ticket8 = new Ticket(8, 300, "VFR", "LED", 220);
-    Ticket ticket9 = new Ticket(9, 753, "DGY", "SVO", 230);
+    Ticket ticket9 = new Ticket(9, 3_200, "DST", "TYG", 230);
     Ticket ticket10 = new Ticket(10, 100, "SVO", "LED", 60);
     Ticket ticket11 = new Ticket(11, 35_000, "NYR", "TYG", 120);
     Ticket ticket12 = new Ticket(12, 7_535, "SDF", "LED", 259);
-    Ticket ticket5Duble = new Ticket(5, 234 , "SDF", "SDS", 456);
+    Ticket ticket5Duble = new Ticket(5, 234, "SDF", "SDS", 456);
 
-    @BeforeEach // Пред условия для тестов
+    @BeforeEach
+        // Пред условия для тестов
     void setup() {
         repository.addTicket(ticket1);
         repository.addTicket(ticket2);
@@ -46,26 +47,27 @@ public class TicketRepositoryTest {
     @Test
     void shouldAddTicket() { // тест на добывление в массив
 
-        Ticket[] expented = new Ticket[] {
-            ticket1,
-            ticket2,
-            ticket3,
-            ticket4,
-            ticket5,
-            ticket6,
-            ticket7,
-            ticket8,
-            ticket9,
-            ticket10,
-            ticket11,
-            ticket12
+        Ticket[] expented = new Ticket[]{
+                ticket1,
+                ticket2,
+                ticket3,
+                ticket4,
+                ticket5,
+                ticket6,
+                ticket7,
+                ticket8,
+                ticket9,
+                ticket10,
+                ticket11,
+                ticket12
         };
         Ticket[] actual = repository.findAll();
 
         assertArrayEquals(expented, actual);
     }
 
-    @Test // тест на добавление билета Id которого уже добавлен
+    @Test
+        // тест на добавление билета Id которого уже добавлен
     void shouldAddTicketAlreadyExistsException() {
         assertThrows(AlreadyExistsException.class, () -> {
             repository.addTicket(ticket5Duble);
@@ -98,14 +100,16 @@ public class TicketRepositoryTest {
 
     }
 
-    @Test // тест на удаления билета из массива по индетификатору Id которого нет в массиве
+    @Test
+        // тест на удаления билета из массива по индетификатору Id которого нет в массиве
     void shouldRemoveByIdNotFoundException() {
         assertThrows(NotFoundException.class, () -> {
             repository.removeById(14);
         });
     }
 
-    @Test // тест на поиск билета по индетификатору Id
+    @Test
+        // тест на поиск билета по индетификатору Id
     void shouldFindByIdPass() {
 
         Ticket expected = ticket6;
@@ -115,7 +119,8 @@ public class TicketRepositoryTest {
         assertEquals(expected, actual);
     }
 
-    @Test // тест на исключение при поиске билета по индетификатору Id которого нет в массиве
+    @Test
+        // тест на исключение при поиске билета по индетификатору Id которого нет в массиве
     void shouldFindByIdNull() {
         assertNull(repository.findById(18));
     }
