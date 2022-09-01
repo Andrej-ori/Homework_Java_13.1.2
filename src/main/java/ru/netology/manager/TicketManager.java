@@ -4,7 +4,7 @@ import ru.netology.data.Ticket;
 import ru.netology.exception.NotFoundException;
 import ru.netology.repository.TicketRepository;
 
-import java.sql.Array;
+import java.util.Comparator;
 import java.util.Arrays;
 
 public class TicketManager {
@@ -28,7 +28,7 @@ public class TicketManager {
 
     // логика менеджерра
     // поиск билета по аэропортам вылета-прилета
-    public Ticket[] findAll(String airportDeparture, String airportArrival) {
+    public Ticket[] findAll(String airportDeparture, String airportArrival, Comparator<Ticket> comparator) {
         Ticket[] results = new Ticket[0];
         for (Ticket ticket : repository.findAll()) {
             if (matchesFromTo(ticket, airportDeparture, airportArrival)) {
@@ -41,7 +41,7 @@ public class TicketManager {
         if (results.length == 0) {
             throw new NotFoundException("Ticket from " + airportDeparture + " to " + airportArrival + "not found");
         }
-        Arrays.sort(results);
+        Arrays.sort(results, comparator);
         return results;
     }
 
